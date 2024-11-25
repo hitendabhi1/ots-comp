@@ -15,26 +15,22 @@ const siteUrl = process.env.SITE_URL;
 
 const port = process.env.PORT || 3001;
 
-// Configure CORS
 const allowedOrigins = [
   "https://optimal-traders.com",
   "https://optimal-traders-aa0294f61-6e15a02942141.webflow.io",
 ];
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps or Postman)
-      if (!origin) return callback(null, true);
+const validateOrigin = (req, res, next) => {
+  const origin = req.headers.origin;
 
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-  })
-);
+  if (!origin || !allowedOrigins.includes(origin)) {
+    return res.status(403).json({ error: "Forbidden: Invalid origin" });
+  }
+
+  next(); // Allow the request if the origin is valid
+};
+
+app.use(validateOrigin);
 
 app.get("/getCoupon", async (req, res) => {
   // Define prizes and probabilities
