@@ -152,7 +152,7 @@ app.get("/getCoupon", async (req, res) => {
       res.status(200).json({
         success: true,
         prize: selectedPrize.name,
-        coupon: responseData,
+        coupon: responseData.code,
       });
     } else {
       const errorData = await response.json();
