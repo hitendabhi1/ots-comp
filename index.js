@@ -1,18 +1,21 @@
 import express, { json } from "express";
+import dotenv from "dotenv";
 import cors from "cors";
 import fetch from "node-fetch";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+dotenv.config();
 
-const port = 3001;
+// Access environment variables
+const consumerKey = process.env.CONSUMER_KEY;
+const consumerSecret = process.env.CONSUMER_SECRET;
+const siteUrl = process.env.SITE_URL;
+
+const port = process.env.PORT || 3001;
 
 app.get("/getCoupon", async (req, res) => {
-  const consumerKey = "ck_2a0a8dbfc93b28c02e37470fda71d0f816d99c5d";
-  const consumerSecret = "cs_473149ccb5b9382ef46730d8e2c53a762f4b57ed";
-  const siteUrl = "https://join.optimal-traders.com/";
-
   // Define prizes and probabilities
   const prizes = [
     // Tier 1
