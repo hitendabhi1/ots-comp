@@ -15,6 +15,27 @@ const siteUrl = process.env.SITE_URL;
 
 const port = process.env.PORT || 3001;
 
+// Configure CORS
+const allowedOrigins = [
+  "https://optimal-traders.com",
+  "https://optimal-traders-aa0294f61-6e15a02942141.webflow.io",
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or Postman)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+  })
+);
+
 app.get("/getCoupon", async (req, res) => {
   // Define prizes and probabilities
   const prizes = [
