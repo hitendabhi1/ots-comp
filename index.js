@@ -139,7 +139,7 @@ app.get("/getCoupon", async (req, res) => {
     usage_limit: 1,
     usage_limit_per_user: 1,
     name: selectedPrize.name,
-    expiry_date: "2024-12-31",
+    expiry_date: "2024-12-03",
   };
 
   // res.status(200).json({
