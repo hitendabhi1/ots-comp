@@ -16,7 +16,7 @@ const siteUrl = process.env.SITE_URL;
 const port = process.env.PORT || 3001;
 
 const allowedOrigins = [
-  "https://www.optimal-traders.com/",
+  "https://www.optimal-traders.com",
   "https://optimal-traders-aa0294f61-6e15a02942141.webflow.io",
 ];
 
