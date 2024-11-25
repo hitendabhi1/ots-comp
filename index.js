@@ -22,6 +22,7 @@ app.get("/getCoupon", async (req, res) => {
     {
       name: "30% off 2-Step Challenge",
       probability: 1,
+      discountName: "Challenge",
       discountType: "percent",
       discountAmount: 30,
       productId: 846,
@@ -31,6 +32,7 @@ app.get("/getCoupon", async (req, res) => {
       name: "25% off 2-Step Challenge",
       probability: 2,
       discountType: "percent",
+      discountName: "Challenge",
       discountAmount: 25,
       productId: 846,
     },
@@ -39,6 +41,7 @@ app.get("/getCoupon", async (req, res) => {
       name: "20% off 2-Step Challenge",
       probability: 7,
       discountType: "percent",
+      discountName: "Challenge",
       discountAmount: 20,
       productId: 846,
     },
@@ -47,6 +50,7 @@ app.get("/getCoupon", async (req, res) => {
       name: "15% off 2-Step Challenge",
       probability: 10,
       discountType: "percent",
+      discountName: "Challenge",
       discountAmount: 15,
       productId: 846,
     },
@@ -54,6 +58,7 @@ app.get("/getCoupon", async (req, res) => {
       name: "15% off 1-Step Algo",
       probability: 10,
       discountType: "percent",
+      discountName: "Algo",
       discountAmount: 15,
       productId: 853,
     },
@@ -62,6 +67,7 @@ app.get("/getCoupon", async (req, res) => {
       name: "15% off 1-Step Standard",
       probability: 20,
       discountType: "percent",
+      discountName: "Standard",
       discountAmount: 15,
       productId: 830,
     },
@@ -69,6 +75,7 @@ app.get("/getCoupon", async (req, res) => {
       name: "12.5% off 1-Step Algo",
       probability: 20,
       discountType: "percent",
+      discountName: "Algo",
       discountAmount: 12.5,
       productId: 853,
     },
@@ -77,6 +84,7 @@ app.get("/getCoupon", async (req, res) => {
       name: "10% off 1-Step Algo",
       probability: 30,
       discountType: "percent",
+      discountName: "Algo",
       discountAmount: 10,
       productId: 853,
     },
@@ -84,6 +92,7 @@ app.get("/getCoupon", async (req, res) => {
       name: "10% off 1-Step Standard",
       probability: 30,
       discountType: "percent",
+      discountName: "Standard",
       discountAmount: 10,
       productId: 830,
     },
@@ -109,12 +118,16 @@ app.get("/getCoupon", async (req, res) => {
   const selectedPrize = selectPrize();
 
   // Generate a unique coupon code
-  const generateUniqueCode = () =>
-    `COUPON_${Date.now()}_${Math.random()
-      .toString(36)
-      .substr(2, 5)
-      .toUpperCase()}`;
-  const couponCode = generateUniqueCode();
+  // const generateUniqueCode = () =>
+  //   `COUPON_${Date.now()}_${Math.random()
+  //     .toString(36)
+  //     .substr(2, 5)
+  //     .toUpperCase()}`;
+  // const couponCode = generateUniqueCode();
+
+  const couponCode = `${selectedPrize.discountAmount?.toString()}_${
+    selectedPrize.discountName
+  }_${Math.random().toString(36).substr(2, 5).toUpperCase()}`;
 
   // Coupon data payload
   const couponData = {
